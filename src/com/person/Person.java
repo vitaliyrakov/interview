@@ -24,7 +24,7 @@ public class Person {
     public static class Builder {
         private Person person;
 
-        public Builder() {
+        private Builder() {
             person = new Person(
                     "Undefined",
                     "Undefined",
