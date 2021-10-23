@@ -1,5 +1,7 @@
 package com.hw2;
 
+import java.util.Arrays;
+
 public class MyArrayListImpl<E> implements MyList<E> {
     private int size;
     private E[] arrayData;
@@ -10,14 +12,20 @@ public class MyArrayListImpl<E> implements MyList<E> {
 
     @Override
     public void add(E value) {
-//        checkArr();
+        checkArr();
         arrayData[size++] = value;
+    }
+
+    private void checkArr() {
+        if (size == arrayData.length) {
+            arrayData = Arrays.copyOf(arrayData, 2 * size);
+        }
     }
 
     @Override
     public boolean add(int index, E value) {
         checkIndex(index);
-//        checkArr();
+        checkArr();
         System.arraycopy(arrayData, index, arrayData, index + 1, size - index);
         arrayData[index] = value;
         size++;
@@ -61,6 +69,16 @@ public class MyArrayListImpl<E> implements MyList<E> {
             }
         }
         return qty;
+    }
+
+    @Override
+    public boolean contains(E value) {
+        for (int i = 0; i < size; i++) {
+            if (arrayData[i].equals(value)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

@@ -61,4 +61,9 @@ public class MyLinkedListImpl<E> implements MyList<E> {
     public int size() {
         return size;
     }
+
+    @Override
+    public boolean contains(E value) {
+        return false;
+    }
 }

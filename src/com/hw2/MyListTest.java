@@ -109,4 +109,14 @@ public class MyListTest {
         assertEquals(null, arrayList.get(1));
         assertEquals(null, arrayList.get(2));
     }
+
+    @Test
+    void alContains() {
+        arrayList.add("1");
+        arrayList.add("2");
+        assertEquals(true, arrayList.contains("2"));
+        assertEquals(false, arrayList.contains("3"));
+    }
+
 }
+

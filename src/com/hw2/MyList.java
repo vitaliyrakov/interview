@@ -10,9 +10,11 @@ public interface MyList<E> {
 
     void set(int index, E value);
 
+    int remove(E value);
+
     boolean remove(int index);
 
-    int remove(E value);
+    boolean contains(E value);
 
     boolean isEmpty();
 
