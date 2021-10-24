@@ -117,9 +117,13 @@ public class MyLinkedListImpl<E> implements MyList<E> {
             if (current == null) throw new IndexOutOfBoundsException();
             counter++;
         }
-        previous.next = next;
-        next.previous=previous;
-        current=null;
+        if (index==0){
+            firstElement = next;
+        } else {
+            previous.next = next;
+        }
+        next.previous = previous;
+        current = null;
         size--;
         return true;
     }
@@ -135,7 +139,6 @@ public class MyLinkedListImpl<E> implements MyList<E> {
 
         while (current != null) {
             if (current.item.equals(value)) {
-
                 if (current == firstElement) {
                     firstElement = next;
                     next.previous = null;
@@ -173,9 +176,7 @@ public class MyLinkedListImpl<E> implements MyList<E> {
     public boolean contains(E value) {
         Node<E> current = firstElement;
         while (current != null) {
-            if (current.item.equals(value)) {
-                return true;
-            }
+            if (current.item.equals(value)) return true;
             current = current.next;
         }
         return false;
