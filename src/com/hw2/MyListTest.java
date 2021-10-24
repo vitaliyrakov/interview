@@ -44,11 +44,12 @@ public class MyListTest {
         arrayList.add("1");
         assertEquals("1", arrayList.get(arrayList.size() - 1));
     }
-//    @Test
-//    void lladd() {
-//        linkedList.add("1");
-//        assertEquals("1", linkedList.get(linkedList.size() - 1));
-//    }
+    @Test
+    void lladd() {
+        linkedList.add("1");
+        linkedList.add("2");
+        assertEquals("2", linkedList.get(linkedList.size() - 1));
+    }
 
     @Test
     void alAddIndex() {
@@ -58,14 +59,17 @@ public class MyListTest {
         assertEquals("3", arrayList.get(1));
         assertEquals("2", arrayList.get(2));
     }
-//    @Test
-//    void lladdIndex() {
-//        linkedList.add("1");
-//        linkedList.add("2");
-//        linkedList.add(0, "3");
-//        assertEquals("3", linkedList.get(0));
-//        assertEquals("1", linkedList.get(1));
-//    }
+    @Test
+    void lladdIndex() {
+        linkedList.add("1");
+        linkedList.add("2");
+        linkedList.add(0, "3");
+        assertEquals("3", linkedList.get(0));
+        assertEquals("1", linkedList.get(1));
+        linkedList.add(1, "4");
+        assertEquals("3", linkedList.get(0));
+        assertEquals("4", linkedList.get(1));
+    }
 
     @Test
     void alGet() {
@@ -73,10 +77,8 @@ public class MyListTest {
         arrayList.add("1");
         assertEquals("1", arrayList.get(arrayList.size() - 1));
     }
-
     @Test
     void llGet() {
-        assertEquals(null, linkedList.get(0));
         linkedList.add("1");
         assertEquals("1", linkedList.get(linkedList.size() - 1));
     }

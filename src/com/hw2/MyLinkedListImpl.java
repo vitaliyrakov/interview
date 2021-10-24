@@ -3,24 +3,67 @@ package com.hw2;
 public class MyLinkedListImpl<E> implements MyList<E> {
 
     private int size;
-    private E[] arrayData;
+    private Node<E> firstElement;
+    private Node<E> lastElement;
 
-    public MyLinkedListImpl() {
-        this.arrayData = (E[]) new Comparable[10];
+    class Node<E> {
+        E item;
+        Node<E> previous;
+        Node<E> next;
+
+        public Node(E item, Node<E> previous, Node<E> next) {
+            this.item = item;
+            this.previous = previous;
+            this.next = next;
+        }
     }
 
     @Override
     public void add(E value) {
-        arrayData[size++] = value;
+        Node<E> entry = new Node<>(value, lastElement, null);
+        if (isEmpty()) {
+            firstElement = entry;
+        } else {
+            lastElement.next = entry;
+        }
+        lastElement = entry;
+        size++;
     }
 
     @Override
     public boolean add(int index, E value) {
-        checkIndex(index);
+        Node<E> current = firstElement;
+        Node<E> next = current.next;
+        Node<E> previous = null;
+        int counter = 0;
 
-        System.arraycopy(arrayData, index, arrayData, index + 1, size - index);
-        arrayData[index] = value;
+        if (index < 0) throw new IndexOutOfBoundsException();
+
+        if (index == 0) {
+            Node<E> entry = new Node<>(value, null, current);
+            current.previous = entry;
+            firstElement = entry;
+            size++;
+            return true;
+        }
+
+        while (current != null && counter < index) {
+            previous = current;
+            current = current.next;
+            next = current.next;
+            counter++;
+        }
+
+        if (current == null) throw new IndexOutOfBoundsException();
+
+        Node<E> entry = new Node<>(value, previous, next);
+        if (current.next == null) {
+            lastElement = entry;
+        }
+        previous.next = entry;
+        current.previous = entry;
         size++;
+
         return true;
     }
 
@@ -34,16 +77,28 @@ public class MyLinkedListImpl<E> implements MyList<E> {
 
     @Override
     public E get(int index) {
-        return arrayData[index];
+        if (index < 0) throw new IndexOutOfBoundsException();
+        if (size == 0) throw new IndexOutOfBoundsException();
+
+        Node<E> current = firstElement;
+        int counter = 0;
+
+        while (counter < index) {
+            current = current.next;
+            if (current == null) throw new IndexOutOfBoundsException();
+            counter++;
+        }
+        return current.item;
     }
 
     @Override
     public void set(int index, E value) {
-
+        checkIndex(index);
     }
 
     @Override
     public boolean remove(int index) {
+        checkIndex(index);
         return true;
     }
 

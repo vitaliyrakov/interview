@@ -42,6 +42,7 @@ public class MyArrayListImpl<E> implements MyList<E> {
 
     @Override
     public E get(int index) {
+        checkIndex(index);
         return arrayData[index];
     }
 
