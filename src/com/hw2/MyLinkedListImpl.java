@@ -32,12 +32,11 @@ public class MyLinkedListImpl<E> implements MyList<E> {
 
     @Override
     public boolean add(int index, E value) {
+        checkIndex(index);
         Node<E> current = firstElement;
         Node<E> next = current.next;
         Node<E> previous = null;
         int counter = 0;
-
-        if (index < 0) throw new IndexOutOfBoundsException();
 
         if (index == 0) {
             Node<E> entry = new Node<>(value, null, current);
@@ -68,16 +67,12 @@ public class MyLinkedListImpl<E> implements MyList<E> {
     }
 
     private void checkIndex(int index) {
-        if (index < 0 || index >= size) {
-            throw new ArrayIndexOutOfBoundsException(
-                    String.format("Индекс должен соответствовать диапазону [0..%s].", size - 1)
-            );
-        }
+        if (index < 0) throw new IndexOutOfBoundsException();
     }
 
     @Override
     public E get(int index) {
-        if (index < 0) throw new IndexOutOfBoundsException();
+        checkIndex(index);
         if (size == 0) throw new IndexOutOfBoundsException();
 
         Node<E> current = firstElement;
@@ -94,17 +89,74 @@ public class MyLinkedListImpl<E> implements MyList<E> {
     @Override
     public void set(int index, E value) {
         checkIndex(index);
+
+        Node<E> current = firstElement;
+        int counter = 0;
+
+        while (counter < index) {
+            current = current.next;
+            if (current == null) throw new IndexOutOfBoundsException();
+            counter++;
+        }
+        current.item = value;
     }
 
     @Override
     public boolean remove(int index) {
         checkIndex(index);
+
+        Node<E> current = firstElement;
+        Node<E> next = current.next;
+        Node<E> previous = null;
+        int counter = 0;
+
+        while (counter < index) {
+            previous = current;
+            current = current.next;
+            next = current.next;
+            if (current == null) throw new IndexOutOfBoundsException();
+            counter++;
+        }
+        previous.next = next;
+        next.previous=previous;
+        current=null;
+        size--;
         return true;
     }
 
     @Override
     public int remove(E value) {
-        return 0;
+        if (size == 0) return 0;
+
+        Node<E> current = firstElement;
+        Node<E> next = current.next;
+        Node<E> previous = null;
+        int removeCounter = 0;
+
+        while (current != null) {
+            if (current.item.equals(value)) {
+
+                if (current == firstElement) {
+                    firstElement = next;
+                    next.previous = null;
+                } else if (current == lastElement) {
+                    lastElement = previous;
+                    previous.next = null;
+                } else {
+                    previous.next = current.next;
+                    next.previous = current.previous;
+                }
+                size--;
+                removeCounter++;
+            }
+            if (next == null) break;
+
+            current = next;
+            next = current.next;
+            previous = current.previous;
+        }
+
+        return removeCounter;
     }
 
     @Override
@@ -119,6 +171,13 @@ public class MyLinkedListImpl<E> implements MyList<E> {
 
     @Override
     public boolean contains(E value) {
+        Node<E> current = firstElement;
+        while (current != null) {
+            if (current.item.equals(value)) {
+                return true;
+            }
+            current = current.next;
+        }
         return false;
     }
 }

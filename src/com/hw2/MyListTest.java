@@ -91,6 +91,14 @@ public class MyListTest {
         assertEquals("3", arrayList.get(0));
         assertEquals("2", arrayList.get(1));
     }
+    @Test
+    void llSet() {
+        linkedList.add("1");
+        linkedList.add("2");
+        linkedList.set(0, "3");
+        assertEquals("3", linkedList.get(0));
+        assertEquals("2", linkedList.get(1));
+    }
 
     @Test
     void alRemoveInd() {
@@ -99,6 +107,14 @@ public class MyListTest {
         arrayList.remove(0);
         assertEquals("2", arrayList.get(0));
         assertEquals(null, arrayList.get(1));
+    }
+    @Test
+    void llRemoveInd() {
+        linkedList.add("1");
+        linkedList.add("2");
+        linkedList.remove(0);
+        assertEquals("2", linkedList.get(0));
+        assertEquals(null, linkedList.get(1));
     }
 
     @Test
@@ -111,6 +127,16 @@ public class MyListTest {
         assertEquals(null, arrayList.get(1));
         assertEquals(null, arrayList.get(2));
     }
+    @Test
+    void llRemove() {
+        linkedList.add("1");
+        linkedList.add("2");
+        linkedList.add("1");
+        linkedList.remove("1");
+        assertEquals("2", linkedList.get(0));
+        assertEquals(null, linkedList.get(1));
+        assertEquals(null, linkedList.get(2));
+    }
 
     @Test
     void alContains() {
@@ -118,6 +144,13 @@ public class MyListTest {
         arrayList.add("2");
         assertEquals(true, arrayList.contains("2"));
         assertEquals(false, arrayList.contains("3"));
+    }
+    @Test
+    void llContains() {
+        linkedList.add("1");
+        linkedList.add("2");
+        assertEquals(true, linkedList.contains("2"));
+        assertEquals(false, linkedList.contains("3"));
     }
 
 }
