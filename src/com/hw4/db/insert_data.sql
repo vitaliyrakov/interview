@@ -1,3 +1,5 @@
+USE TEST_DB
+
 INSERT INTO dbo.duration
  VALUES (60),(90),(120);
  
@@ -20,11 +22,4 @@ INSERT INTO dbo.movies
  ('2016-12-02 12:00:00',2,4);
  
  INSERT INTO dbo.tickets
- VALUES
- (3),
- (3),
- (4),
- (5),
- (6),
- (6),
- (6);
+ VALUES (3), (3), (4), (5), (6), (6), (6);
