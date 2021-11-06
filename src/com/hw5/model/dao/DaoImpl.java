@@ -4,18 +4,18 @@ import org.hibernate.Session;
 
 import java.util.List;
 
-import static ru.ntr.preparing.hw05.config.HibernateUtil.getCurrentSession;
+import static com.hw5.HibernateUtil.getCurrentSession;
 
-public class AbstractDao<T>  implements IDao<T>{
+public class DaoImpl<T>  implements Dao<T> {
 
     private Class<T> clazz;
 
-    public void setClazz(final Class<T> clazzToSet) {
-        clazz = clazzToSet;
+    public void setClassStudent(final Class<T> classToSet) {
+        clazz = classToSet;
     }
 
     @Override
-    public void persist(T entity) {
+    public void save(T entity) {
         Session currentSession = getCurrentSession();
         getCurrentSession().save(entity);
     }

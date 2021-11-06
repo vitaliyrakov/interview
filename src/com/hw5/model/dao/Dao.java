@@ -1,11 +1,9 @@
 package com.hw5.model.dao;
 
-import ru.ntr.preparing.hw05.model.entity.Student;
-
 import java.util.List;
 
-public interface IDao<T> {
-    void persist(T entity);
+public interface Dao<T> {
+    void save(T entity);
 
     void update(T entity);
 

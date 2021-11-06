@@ -6,37 +6,25 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-import org.springframework.stereotype.Component;
 
 public class HibernateUtil {
 
-    @Getter
-    private Session currentSession;
+    private static Session currentSession;
 
-    @Getter
-    private Transaction currentTransaction;
-    public static Session openCurrentSession() {
-        return getSessionFactory().openSession();
-    }
-
-    public static Session openCurrentSessionWithTransaction() {
-        currentSession = getSessionFactory().openSession();
-        currentTransaction = currentSession.beginTransaction();
+    public static Session getCurrentSession() {
         return currentSession;
     }
 
-    public static void closeCurrentSession() {
-        currentSession.close();
-    }
-
-    public static void closeCurrentSessionWithTransaction() {
-        currentTransaction.commit();
-        currentSession.close();
+//    @Getter
+//    private Transaction currentTransaction;
+    public static Session openCurrentSession() {
+        currentSession = getSessionFactory().openSession();
+        return currentSession;
     }
 
     private static SessionFactory getSessionFactory() {
         Configuration configuration = new Configuration().configure();
-        configuration.addAnnotatedClass(ru.ntr.preparing.hw05.model.entity.Student.class);
+        configuration.addAnnotatedClass(com.hw5.model.entity.Student.class);
         StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder()
                 .applySettings(configuration.getProperties());
         SessionFactory sessionFactory = configuration.buildSessionFactory(builder.build());

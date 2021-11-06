@@ -1,12 +1,14 @@
 package com.hw5.model.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "student")
+@Table(name = "Student")
 @Data
-public class Student implements Serializable {
+public class Student implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,5 +20,4 @@ public class Student implements Serializable {
 
     @Column(name = "mark")
     private String mark;
-
 }
