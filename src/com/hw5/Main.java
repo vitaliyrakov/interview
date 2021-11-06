@@ -25,28 +25,35 @@ public class Main implements CommandLineRunner {
 
         HibernateUtil.openCurrentSession();
 //        //studentDao.deleteAll();
-        for (int i = 0; i < STUDENTS_CNT; i++) {
+        for (int i = 1; i <= STUDENTS_CNT; i++) {
             Student student = new Student();
             Random random = new Random();
             student.setName("Student" + random.nextInt());
             student.setMark("mark");
+            student.setId(i);
             studentDao.save(student);
             System.out.println(student.getName());
         }
-//        HibernateUtil.closeCurrentSessionWithTransaction();
-//
-//        HibernateUtil.openCurrentSessionWithTransaction();
-//        Student student = studentDao.findById(3695);
-//        System.out.println(student);
-//        studentDao.update(student);
-//        HibernateUtil.closeCurrentSessionWithTransaction();
-//
-//        HibernateUtil.openCurrentSessionWithTransaction();
-//        System.out.println(studentDao.findById(3695));
-//        HibernateUtil.closeCurrentSessionWithTransaction();
-//
-//        HibernateUtil.openCurrentSessionWithTransaction();
-//        studentDao.findAll().forEach(System.out::println);
-//        HibernateUtil.openCurrentSessionWithTransaction();
+        HibernateUtil.closeCurrentSession();
+
+        HibernateUtil.openCurrentSession();
+        Student student = studentDao.findById(100);
+        System.out.println(student);
+        student.setName(student.getName()+"_new");
+        studentDao.update(student);
+        student = studentDao.findById(100);
+        System.out.println(student);
+        HibernateUtil.closeCurrentSession();
+
+        HibernateUtil.openCurrentSession();
+        student = studentDao.findById(100);
+        studentDao.delete(student);
+        student = studentDao.findById(100);
+        System.out.println(student);
+        HibernateUtil.closeCurrentSession();
+
+        HibernateUtil.openCurrentSession();
+        studentDao.findAll().forEach(System.out::println);
+        HibernateUtil.closeCurrentSession();
     }
 }

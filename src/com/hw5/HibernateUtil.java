@@ -10,16 +10,22 @@ import org.hibernate.cfg.Configuration;
 public class HibernateUtil {
 
     private static Session currentSession;
+    @Getter
+    private static Transaction currentTransaction;
 
     public static Session getCurrentSession() {
         return currentSession;
     }
 
-//    @Getter
-//    private Transaction currentTransaction;
     public static Session openCurrentSession() {
         currentSession = getSessionFactory().openSession();
+        currentTransaction = currentSession.beginTransaction();
         return currentSession;
+    }
+
+    public static void closeCurrentSession() {
+        currentTransaction.commit();
+        currentSession.close();
     }
 
     private static SessionFactory getSessionFactory() {
