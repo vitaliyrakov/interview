@@ -8,10 +8,10 @@ import static com.hw5.HibernateUtil.getCurrentSession;
 
 public class DaoImpl<T>  implements Dao<T> {
 
-    private Class<T> clazz;
+    private Class<T> classCur;
 
     public void setClassStudent(final Class<T> classToSet) {
-        clazz = classToSet;
+        classCur = classToSet;
     }
 
     @Override
@@ -27,7 +27,7 @@ public class DaoImpl<T>  implements Dao<T> {
 
     @Override
     public T findById(int id) {
-        return (T) getCurrentSession().get(clazz , id);
+        return (T) getCurrentSession().get(classCur, id);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class DaoImpl<T>  implements Dao<T> {
 
     @Override
     public List<T> findAll() {
-        return (List<T>) getCurrentSession().createQuery("from " + clazz.getSimpleName()).list();
+        return (List<T>) getCurrentSession().createQuery("from " + classCur.getSimpleName()).list();
     }
 
     @Override

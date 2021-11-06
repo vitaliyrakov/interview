@@ -23,37 +23,38 @@ public class Main implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        HibernateUtil.openCurrentSession();
-//        //studentDao.deleteAll();
+        Student student;
+
+        HibernateUtil.openSession();
+        //studentDao.deleteAll();
         for (int i = 1; i <= STUDENTS_CNT; i++) {
-            Student student = new Student();
+            student = new Student();
             Random random = new Random();
             student.setName("Student" + random.nextInt());
             student.setMark("mark");
             student.setId(i);
             studentDao.save(student);
-            System.out.println(student.getName());
         }
-        HibernateUtil.closeCurrentSession();
+        HibernateUtil.closeSession();
 
-        HibernateUtil.openCurrentSession();
-        Student student = studentDao.findById(100);
+        int testID = 1111;
+        HibernateUtil.openSession();
+        student = studentDao.findById(testID);
         System.out.println(student);
-        student.setName(student.getName()+"_new");
+        student.setName(student.getName() + "_new");
         studentDao.update(student);
-        student = studentDao.findById(100);
+        student = studentDao.findById(testID);
         System.out.println(student);
-        HibernateUtil.closeCurrentSession();
+        HibernateUtil.closeSession();
 
-        HibernateUtil.openCurrentSession();
-        student = studentDao.findById(100);
+        HibernateUtil.openSession();
+        student = studentDao.findById(testID);
         studentDao.delete(student);
-        student = studentDao.findById(100);
-        System.out.println(student);
-        HibernateUtil.closeCurrentSession();
+        System.out.println(studentDao.findById(testID));
+        HibernateUtil.closeSession();
 
-        HibernateUtil.openCurrentSession();
+        HibernateUtil.openSession();
         studentDao.findAll().forEach(System.out::println);
-        HibernateUtil.closeCurrentSession();
+        HibernateUtil.closeSession();
     }
 }
