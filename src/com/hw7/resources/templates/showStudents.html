@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Студенты</title>
+</head>
+
+<body>
+<h2>Студенты</h2>
+<table>
+    <thead>
+    <tr>
+        <th> Имя</th>
+        <th> Возраст</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${student.isEmpty()}">
+        <td colspan="2"> Нет данных</td>
+    </tr>
+
+    <tr th:each="student : ${student}">
+        <td><a th:href="@{/students/{id}(id = ${student.getId()})}"
+               th:text="${student.getName()}">students</a></td>
+        <td><a th:href="@{/students/{id}(id = ${student.getId()})}" th:text="${student.getAge()}">students</a></td>
+        <td>
+            <a th:href="@{/students/edit/{id}(id = ${student.getId()})}">Edit</a>
+        </td>
+        <td>
+            <form th:method="delete" th:action="@{/students/{id}(id=${student.getId()})}">
+                <input type="submit" value="Delete">
+            </form>
+        </td>
+
+    </tr>
+    </tbody>
+</table>
+
+<a th:href="@{/student/new}">
+    <button type="button">Добавить</button>
+</a>
+
+</body>
+</html>

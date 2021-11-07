@@ -32,7 +32,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void delete(int id) {
+    public void deleteById(int id) {
         studentRepository.deleteById(id);
     }
 
