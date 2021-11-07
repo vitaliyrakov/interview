@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Студенты</title>
+</head>
+
+<body>
+
+<h2>Студенты</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th> Id</th>
+        <th> Имя</th>
+        <th> Возраст</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr>
+        <td><span th:text="${student.getId()}">Id</span><br></td>
+        <td><span th:text="${student.getName()}">Имя</span><br></td>
+        <td><span th:text="${student.getAge()}">Возраст</span><br></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

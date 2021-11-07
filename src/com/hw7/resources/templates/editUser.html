@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование студента</title>
+</head>
+<body>
+
+<form method="post" th:action="@{/students/new}" th:object="${student}">
+    <p>
+        <label for="name">Имя:</label>
+        <input type="text" size="40" id="name" th:field="*{name}"/><br>
+        <label for="age">Возраст:</label>
+        <input type="text" size="40" id="age" th:field="*{age}"/><br>
+    </p>
+    <p>
+        <input type="submit" value="Сохранить">
+    </p>
+</form>
+</body>
+</html>
